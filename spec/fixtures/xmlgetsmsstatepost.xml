@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<response>
+  <status>OK</status>
+  <text></text>
+  <entries>
+    <entry>
+      <smscid>ID_1</smscid>
+      <state>STATE</state>
+    </entry>
+    <entry>
+      <smscid>ID_2</smscid>
+      <state>STATE</state>
+    </entry>
+    <entry>
+      <smscid>ID_N</smscid>
+      <state>неверно указан id</state>
+    </entry>
+  </entries>
+</response>

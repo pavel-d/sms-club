@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<response>
+  <status>OK</status>
+  <text>RESULT_TEXT</text>
+  <ids>
+    <mess>ID_1</mess>
+    <mess>ID_2</mess>
+    <mess>ID_N</mess>
+  </ids>
+</response>
