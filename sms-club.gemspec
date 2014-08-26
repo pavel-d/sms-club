@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Sms::Club::VERSION
   spec.authors       = ['Pavel Dotsulenko']
   spec.email         = ['paul@live.ru']
-  spec.summary       = 'TODO: Write a short summary. Required.'
-  spec.description   = 'TODO: Write a longer description. Optional.'
+  spec.summary       = 'Client for http://smsclub.mobi/ SMS gate'
+  spec.description   = 'Client for http://smsclub.mobi/ SMS gate. Allows you to send and retrieve status of sent SMS via XML API.'
   spec.homepage      = ''
   spec.license       = 'MIT'
 
