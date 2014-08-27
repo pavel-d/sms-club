@@ -1,7 +1,9 @@
 require 'faraday'
 require 'nokogiri'
+require 'translit'
 
 module SmsClub
+  # API documentation http://smsclub.mobi/en/pages/show/api#xml
   class Client
     attr_accessor :user_name, :password, :from, :transliterate
 
@@ -38,13 +40,13 @@ module SmsClub
       response = connection.post '/hfw_smpp_addon/xmlsendsmspost.php', xmlrequest: payload.to_xml
       doc = Nokogiri::XML(response.body)
 
-      raise SmsClubError, doc.xpath('//text').text unless doc.xpath('//status').text == 'OK'
+      raise SmsClubError, response_error(doc) if response_failed?(doc)
 
       doc.xpath('//mess').map(&:content)
     end
 
     def status_for(smscid)
-      statuses_for(smscid).first[:state]
+      statuses_for(smscid).first[smscid]
     end
 
     def statuses_for(smscid)
@@ -62,15 +64,14 @@ module SmsClub
 
       doc = Nokogiri::XML(response.body)
 
-      raise SmsClubError, doc.xpath('//text') unless doc.xpath('//status').text == 'OK'
+      raise SmsClubError, response_error(doc) if response_failed?(doc)
 
-      statuses = doc.xpath('//entry').map do |entry|
-        { id: entry.xpath('smscid').text, state: entry.xpath('state').text.downcase.to_sym }
+      doc.xpath('//entry').map do |entry|
+        { entry.xpath('smscid').text => entry.xpath('state').text.downcase.to_sym }
       end
-      statuses
     end
 
-    private
+    protected
 
     def connection
       @connection ||= Faraday.new(url: 'https://gate.smsclub.mobi/') do |faraday|
@@ -81,6 +82,14 @@ module SmsClub
 
     def translit_message(message)
       Translit.convert message
+    end
+
+    def response_failed?(xml_doc)
+      xml_doc.xpath('//status').text != 'OK'
+    end
+
+    def response_error(xml_doc)
+      xml_doc.xpath('//text').text
     end
   end
 end

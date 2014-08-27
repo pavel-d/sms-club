@@ -5,15 +5,11 @@
   <entries>
     <entry>
       <smscid>ID_1</smscid>
-      <state>STATE</state>
+      <state>delivrd</state>
     </entry>
     <entry>
       <smscid>ID_2</smscid>
-      <state>STATE</state>
-    </entry>
-    <entry>
-      <smscid>ID_N</smscid>
-      <state>неверно указан id</state>
+      <state>delivrd</state>
     </entry>
   </entries>
 </response>

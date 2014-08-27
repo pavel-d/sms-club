@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<response>
+  <status>ERROR</status>
+  <text>An error description</text>
+  <ids>
+    <mess>ID_1</mess>
+    <mess>ID_2</mess>
+    <mess>ID_N</mess>
+  </ids>
+</response>
