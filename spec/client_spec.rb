@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'webmock/rspec'
 require 'uri'
-require 'sms-club/resque'
+require 'sms-club/async'
 
 describe SmsClub::Client do
 
