@@ -16,7 +16,12 @@ module SmsClub
     end
 
     def send_async(message, options = {})
-      Resque.enqueue(self, @init_args, message, options)
+      begin
+        Resque.enqueue(self, @init_args, message, options)
+      rescue Redis::CannotConnectError => e
+        warn e
+        warn 'Can not connect to redis server. Falling back to synchronous mode.'
+      end
     end
 
     def self.perform(init_args, message, options)

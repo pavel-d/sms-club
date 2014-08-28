@@ -4,7 +4,6 @@ require 'uri'
 require 'sms-club/async'
 
 describe SmsClub::Client do
-
   let(:client) { SmsClub::Client.new '380993123123', 'password', from: 'KupiChehol' }
 
   describe '#send' do
@@ -71,22 +70,6 @@ describe SmsClub::Client do
     it 'should return hash of message statuses' do
       result = client.statuses_for ['ID_1', 'ID_2']
       expect(result).to eq [{ 'ID_1' => :delivrd }, { 'ID_2' => :delivrd }]
-    end
-  end
-end
-
-describe SmsClub::AsyncClient do
-  let(:client) { SmsClub::AsyncClient.new '380993123123', 'password', from: 'KupiChehol' }
-
-
-  describe '#send' do
-    before do
-      stub_request(:post, 'https://gate.smsclub.mobi/hfw_smpp_addon/xmlsendsmspost.php')
-         .to_return(status: 200, body: File.open('./spec/fixtures/xmlsendsmspost.xml'), headers: {})
-    end
-
-    it 'should send sms asynchronously' do
-      client.send_async 'test', to: '+380666128206'
     end
   end
 end
