@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sms-club (0.2.0)
+    sms-club (0.2.1)
       faraday (~> 0.9)
       iconv (~> 1.0)
       nokogiri (~> 1.6)

@@ -15,10 +15,10 @@ module SmsClub
     end
 
     def send_one(message, options = {})
-      send(message, options).first
+      send_many(message, options).first
     end
 
-    def send(message, options = {})
+    def send_many(message, options = {})
       fail ArgumentError, 'Recepient is not defined' unless options[:to]
 
       to = options[:to]

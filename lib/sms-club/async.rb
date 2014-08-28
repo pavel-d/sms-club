@@ -20,7 +20,7 @@ module SmsClub
     end
 
     def self.perform(init_args, message, options)
-      client = self.new(init_args).send(message, options)
+      client = self.new(init_args).send_many(message, options)
     end
   end
 end

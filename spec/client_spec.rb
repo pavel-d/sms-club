@@ -21,7 +21,7 @@ describe SmsClub::Client do
     end
 
     it 'should send messages to multiple recipients' do
-      result = client.send 'test', to: ['+380664018206', '+380666018203', '+380666018202']
+      result = client.send_many'test', to: ['+380664018206', '+380666018203', '+380666018202']
 
       expect(result).to be_an Array
       expect(result.length).to eq 3
@@ -37,7 +37,7 @@ describe SmsClub::Client do
       end
 
       it 'should include multiple phone numbers' do
-        client.send 'test', to: ['+380664018206', '+380666018203', '+380666018202']
+        client.send_many'test', to: ['+380664018206', '+380666018203', '+380666018202']
 
         expect(a_request(:post, 'https://gate.smsclub.mobi/hfw_smpp_addon/xmlsendsmspost.php')
             .with { |req| URI.decode(req.body) =~ /\+380664018206;\+380666018203;\+380666018202/ })
@@ -48,7 +48,7 @@ describe SmsClub::Client do
     it 'should throw error if send failed' do
       stub_request(:post, 'https://gate.smsclub.mobi/hfw_smpp_addon/xmlsendsmspost.php')
          .to_return(status: 200, body: File.open('./spec/fixtures/xmlsendsmspost.failed.xml'), headers: {})
-      expect { client.send 'test', to: ['+380664018206', '+380666018203', '+380666018202'] }.to raise_error
+      expect { client.send_many'test', to: ['+380664018206', '+380666018203', '+380666018202'] }.to raise_error
     end
 
     it 'should transliterate message when tranliterate: true' do
