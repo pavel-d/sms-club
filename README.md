@@ -62,12 +62,14 @@ For more info please see original api docs http://smsclub.mobi/en/pages/show/api
 It also support asynchronous SMS sending with [Resque](https://github.com/resque/resque) gem
 
 ```
-require 'sms-club/resque
+require 'sms-club/resque'
 client = SmsClub::Client.new '380993123123', 'password', from: 'CoolCompany'
 client.send_async 'async test', to: ['+380664018206', '+380666018203', '+380666018202']
 ```
 
 When Redis server is not available it automatically switches to synchronous mode.
+
+Make sure `Resque` is added to your Gemfile.
 
 ## Contributing
 
