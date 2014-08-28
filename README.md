@@ -63,7 +63,7 @@ It also support asynchronous SMS sending with [Resque](https://github.com/resque
 
 ```
 require 'sms-club/resque'
-client = SmsClub::Client.new '380993123123', 'password', from: 'CoolCompany'
+client = SmsClub::AsyncClient.new '380993123123', 'password', from: 'CoolCompany'
 client.send_async 'async test', to: ['+380664018206', '+380666018203', '+380666018202']
 ```
 
