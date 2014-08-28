@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Pavel Dotsulenko']
   spec.email         = ['paul@live.ru']
   spec.summary       = 'Client for http://smsclub.mobi/ SMS gate'
-  spec.description   = 'Client for http://smsclub.mobi/ SMS gate. Allows you to send and retrieve status of sent SMS via XML API.'
+  spec.description   = 'Client for http://smsclub.mobi/ SMS gate. Allows you to send and retrieve status of sent SMS via XML API. Supports Resque for asynchronous sending.'
   spec.homepage      = 'https://github.com/pavel-d/sms-club'
   spec.license       = 'MIT'
 
@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'webmock', '~> 1.18'
   spec.add_development_dependency 'rspec', '~> 3.0'
+  spec.add_development_dependency 'resque'
 
   spec.add_runtime_dependency 'faraday', '~> 0.9'
   spec.add_runtime_dependency 'translit', '~> 0.1'
