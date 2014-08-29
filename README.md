@@ -1,4 +1,4 @@
-# SmsClub API Client
+# SmsClub API Client [![Gem Version](https://badge.fury.io/rb/sms-club.svg)](http://badge.fury.io/rb/sms-club)
 
 Client for http://smsclub.mobi/ SMS gate. Allows you to send and retrieve status of sent SMS via XML API.
 
@@ -56,6 +56,20 @@ client.statuses_for ['ID_1', 'ID_2']
 ```
 
 For more info please see original api docs http://smsclub.mobi/en/pages/show/api#xml
+
+## Resque
+
+It also support asynchronous SMS sending with [Resque](https://github.com/resque/resque) gem
+
+```
+require 'sms-club/resque'
+client = SmsClub::AsyncClient.new '380993123123', 'password', from: 'CoolCompany'
+client.send_async 'async test', to: ['+380664018206', '+380666018203', '+380666018202']
+```
+
+When Redis server is not available it automatically switches to synchronous mode.
+
+Make sure `Resque` is added to your Gemfile.
 
 ## Contributing
 
