@@ -21,6 +21,7 @@ module SmsClub
       rescue Redis::CannotConnectError => e
         warn e
         warn 'Can not connect to redis server. Falling back to synchronous mode.'
+        send_many message, options
       end
     end
 
