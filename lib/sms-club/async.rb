@@ -11,8 +11,11 @@ module SmsClub
 
     def initialize(*args)
       @init_args = args
-      @queue = 'sms_club'
       super
+    end
+
+    def self.queue
+      'sms_club'
     end
 
     def send_async(message, options = {})
@@ -25,8 +28,15 @@ module SmsClub
       end
     end
 
-    def self.perform(init_args, message, options)
-      client = self.new(init_args).send_many(message, options)
+    def self.perform(init_args, message, msg_options)
+      # Ugliness level 99. Needed to pass args to constructor
+      # when Resque instantiate AsyncClient
+      user_name, password, options = init_args
+
+      # Resque serializes params to json, so symbols are
+      # converted to strings, which is not what we want
+      puts new(user_name, password, options.symbolize_keys!)
+              .send_many(message, msg_options.symbolize_keys!)
     end
   end
 end
